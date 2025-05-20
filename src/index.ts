@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { open } from 'sqlite3'
+import sqlite3 from 'sqlite3'
 import { open } from 'sqlite'
 
 const app = express()
@@ -27,7 +27,6 @@ async function setupDB() {
   `)
 }
 
-// GET /api/employee?telegram_id=123
 app.get('/api/employee', async (req, res) => {
   const { telegram_id } = req.query
   if (!telegram_id) return res.status(400).json({ error: 'Missing telegram_id' })
@@ -41,8 +40,7 @@ app.get('/api/employee', async (req, res) => {
   })
 })
 
-// Добавим тестовую запись
-app.get('/seed', async (req, res) => {
+app.get('/seed', async (_req, res) => {
   await db.run(`
     INSERT OR REPLACE INTO employees
     (telegram_id, name, address, passport, inn, skills)
@@ -54,6 +52,6 @@ app.get('/seed', async (req, res) => {
 const port = process.env.PORT || 3000
 setupDB().then(() => {
   app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
+    console.log(`Server running on port ${port}`)
   })
 })
