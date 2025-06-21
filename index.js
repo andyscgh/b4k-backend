@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
+const routes = require('./routes');
 
-// другие настройки
+app.use(express.json());
+app.use(routes);
 
 app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log('Server is running');
 });
-// Express backend entry with admin features
