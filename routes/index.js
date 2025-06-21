@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// Пример запроса
+// Подключение отдельных роутов
+router.use('/api/events', require('./events'));
+
+// Пример запроса: получить всех пользователей
 router.get('/users', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM users');
