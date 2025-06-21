@@ -9,6 +9,8 @@ app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
-app.listen(3000, () => {
-  console.log('Server is running');
+// ✅ Используем PORT из окружения, чтобы Railway знал, какой порт слушать
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
